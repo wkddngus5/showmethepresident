@@ -4,9 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import showmethepresident.jdbc.Query;
 import showmethepresident.relation.Candidate;
 import showmethepresident.relation.SearchPropotion;
+import showmethepresident.util.Query;
 //검색량 100%
 public class SearchPropotionOnly implements AnalysisStrategy{
 
@@ -16,10 +16,10 @@ public class SearchPropotionOnly implements AnalysisStrategy{
 		for(int i=0; i<candidateList.size();i++){
 			Candidate candidate = candidateList.get(i);
 			
+			if(findNewestSearchPropotion(candidate)!=null){
 			candidate.setSearchPropotion(findNewestSearchPropotion(candidate));
-//			SearchPropotion searchPropotion = findSearchPropotionByCandidate(candidate.getId());
-//			System.out.println(candidate.getName()+"후보의 검색량: "+searchPropotion.getValue());
-//			candidateList.get(i).setSearchPoint(searchPropotion.getValue());
+			}
+			
 		}
 	}
 	
@@ -29,17 +29,17 @@ public class SearchPropotionOnly implements AnalysisStrategy{
 		SearchPropotion newestSearchPropotion = null;
 				
 		try {
-			query.sql = "CALL averageSurvey("+id+");";
+			query.sql = "SELECT * FROM SearchPropotion "
+					+ "WHERE Candidate_id="+id+" ORDER BY date DESC LIMIT 1";
 			query.rs = query.stmt.executeQuery(query.sql);
 			
-			query.rs.next();
+			if(query.rs.next()==true){
 			Date date = query.rs.getDate(1);
 			int candidateId = query.rs.getInt(2);
 			float value = query.rs.getFloat(3);
 			
 			newestSearchPropotion = new SearchPropotion(date, candidateId, value);
-			System.out.println(newestSearchPropotion.getValue());
-			
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -4,12 +4,13 @@ public class Candidate {
 	
 	private int id;
 	private String name;
-	private int partyId;
+	private int partyId=0;
 	
-	private SearchPropotion searchPropotion;
-	private Survey survey;
-	private Party party;
-	private float trendsPoint;
+	private SearchPropotion searchPropotion=null;
+	private Survey survey=null;
+	private Party party=null;
+	private float searchOnWeek=0;
+	private float totalPoint=0;
 	
 	
 	public Candidate(int id, String name, int partyId) {
@@ -47,8 +48,8 @@ public class Candidate {
 		this.party = party;
 	}
 
-	public void setTrendsPoint(float trendsPoint) {
-		this.trendsPoint = trendsPoint;
+	public void searchOnWeek(float searchOnWeek) {
+		this.searchOnWeek = searchOnWeek;
 	}
 
 	public Survey getSurvey() {
@@ -63,8 +64,20 @@ public class Candidate {
 		return searchPropotion;
 	}
 
-	public float getTrendsPoint() {
-		return trendsPoint;
+	public float getSearchOnWeek() {
+		return searchOnWeek;
+	}
+
+	public Party getParty() {
+		return party;
+	}
+
+	public float getTotalPoint() {
+		return totalPoint;
+	}
+
+	public void setTotalPoint(float totalPoint) {
+		this.totalPoint = totalPoint;
 	}
 	
 	

@@ -2,44 +2,43 @@ package showmethepresident.analysisstrategy;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import showmethepresident.relation.Candidate;
-import showmethepresident.relation.SearchPropotion;
+import showmethepresident.relation.Party;
 import showmethepresident.relation.Survey;
 import showmethepresident.util.Query;
 
-public class SurveyOnly implements AnalysisStrategy{
+public class PartyOnly implements AnalysisStrategy{
 
 	@Override
 	public void showMeThePresident(ArrayList<Candidate> candidateList) {
-		for(int i = 0; i<candidateList.size(); i++){
+		for(int i =0; i<candidateList.size(); i++){
 			Candidate candidate = candidateList.get(i);
-			
-			candidate.setSurvey(findNewestSurvey(candidate));
+			if(candidate.getPartyId()!=0){
+				candidate.setParty(findParty(candidate));
+			}
 		}
 	}
 	
-	public Survey findNewestSurvey(Candidate candidate){
+	public Party findParty(Candidate candidate){
 		Query query = new Query();
-		String id = candidate.getId()+"";
+		String id = candidate.getPartyId()+"";
 		Survey newestSurvey = null;
-				
+		Party party= null;
+		
 		try {
-			query.sql = "CALL averageSurvey("+id+"); ";
+			query.sql = "SELECT * FROM Party WHERE id="+id;
 			query.rs = query.stmt.executeQuery(query.sql);
 			
 			query.rs.next();
-			Date date = query.rs.getDate(1);
-			float value = query.rs.getFloat(2);
-			
-			newestSurvey = new Survey(3, date, candidate.getId(), value);
-			
+			String name = query.rs.getString(2);
+			float approvalRating = query.rs.getFloat(3);
+			party = new Party(candidate.getPartyId(), name, approvalRating);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return newestSurvey;
+		return party;
 	}
 
 }
