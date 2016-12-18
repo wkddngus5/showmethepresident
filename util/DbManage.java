@@ -156,13 +156,13 @@ public class DbManage {
 			case 2:
 				System.out.print("\n삭제할 검색량의 날짜 입력(YYYY-MM-DD): ");
 				String searchDate = Stream.inputString();
-				sendIQuery("DELETE FROM SearchPropotion WHERE (Candidate_id=" + candidateId + " AND date=" + searchDate
-						+ ");");
+				sendIQuery("DELETE FROM SearchPropotion WHERE (Candidate_id=" + candidateId + " AND date='" + searchDate
+						+ "');");
 				break;
 			case 3:
 				System.out.print("\n삭제할 여론조사의 날짜 입력(YYYY-MM-DD): ");
 				String surveyDate = Stream.inputString();
-				sendIQuery("DELETE FROM Survey WHERE (Candidate_id=" + candidateId + " AND date=" + surveyDate + ");");
+				sendIQuery("DELETE FROM Survey WHERE (Candidate_id=" + candidateId + " AND date='" + surveyDate + "');");
 				break;
 			case 4:
 				System.out.println("뒤로 가기");
