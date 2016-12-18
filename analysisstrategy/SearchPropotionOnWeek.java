@@ -6,7 +6,7 @@ import java.util.Date;
 
 import showmethepresident.relation.Candidate;
 import showmethepresident.relation.SearchPropotion;
-import showmethepresident.util.Query;
+import showmethepresident.util.DbManage;
 //검색 트렌드 100%
 public class SearchPropotionOnWeek implements AnalysisStrategy{
 
@@ -21,7 +21,7 @@ public class SearchPropotionOnWeek implements AnalysisStrategy{
 	}
 	
 	public float candidateSearchOnWeek(Candidate candidate){
-		Query query= new Query();
+		DbManage query= new DbManage();
 		float weekSearch = 0;
 		String id = candidate.getId()+"";
 		

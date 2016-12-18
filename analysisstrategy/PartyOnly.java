@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import showmethepresident.relation.Candidate;
 import showmethepresident.relation.Party;
 import showmethepresident.relation.Survey;
-import showmethepresident.util.Query;
+import showmethepresident.util.DbManage;
 
 public class PartyOnly implements AnalysisStrategy{
 
@@ -21,7 +21,7 @@ public class PartyOnly implements AnalysisStrategy{
 	}
 	
 	public Party findParty(Candidate candidate){
-		Query query = new Query();
+		DbManage query = new DbManage();
 		String id = candidate.getPartyId()+"";
 		Survey newestSurvey = null;
 		Party party= null;

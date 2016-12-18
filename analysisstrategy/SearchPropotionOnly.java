@@ -6,7 +6,7 @@ import java.util.Date;
 
 import showmethepresident.relation.Candidate;
 import showmethepresident.relation.SearchPropotion;
-import showmethepresident.util.Query;
+import showmethepresident.util.DbManage;
 //검색량 100%
 public class SearchPropotionOnly implements AnalysisStrategy{
 
@@ -24,7 +24,7 @@ public class SearchPropotionOnly implements AnalysisStrategy{
 	}
 	
 	public SearchPropotion findNewestSearchPropotion(Candidate candidate){
-		Query query = new Query();
+		DbManage query = new DbManage();
 		String id = candidate.getId()+"";
 		SearchPropotion newestSearchPropotion = null;
 				

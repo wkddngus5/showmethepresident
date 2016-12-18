@@ -1,6 +1,9 @@
 package showmethepresident.relation;
 
-public class Candidate {
+import showmethepresident.util.DbManage;
+import showmethepresident.util.Stream;
+
+public class Candidate{
 	
 	private int id;
 	private String name;
@@ -81,6 +84,37 @@ public class Candidate {
 	}
 	
 	
-
+	
+	public static void detailCandidate(Candidate candidate){
+		int inputInt = 0;
+		do{
+			System.out.println("\n후보 이름: "+candidate.getName()
+				+"\n소속 정당: "+candidate.getParty().getName()+"(당 지지율: "+candidate.getParty().getApprovalRating()+"%)"
+				+"\n검색량: "+candidate.getSearchPropotion().getValue()+"%("+candidate.getSearchPropotion().getDate()+")"
+				+"\n여론조사 지지율: "+candidate.getSurvey().getValue()+"%("+candidate.getSurvey().getDate()+")"
+				+"\n연관 단어들: ");
+		
+			System.out.print("\n1. 데이터 입력   |2. 데이터 수정   |3. 데이터 삭제   |4.뒤로\n입력: ");
+			inputInt = Stream.inputInt();
+	
+			
+			switch(inputInt){
+				case 1:
+					DbManage.sendInputQuery(candidate.getId());
+					break;
+				case 2:
+					DbManage.sendUpdateQuery(candidate.getId());
+					break;
+				case 3:
+					DbManage.sendDeleteQuery(candidate.getId());
+					break;
+				case 4:
+					System.out.println("뒤로 이동");
+					break;
+				default: 
+					System.out.println("입력 값이 올바르지 않습니다. 다시 입력해주세요");
+			}
+		}while(inputInt!=4);	
+	}
 
 }

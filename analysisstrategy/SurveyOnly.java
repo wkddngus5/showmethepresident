@@ -7,7 +7,7 @@ import java.util.Date;
 import showmethepresident.relation.Candidate;
 import showmethepresident.relation.SearchPropotion;
 import showmethepresident.relation.Survey;
-import showmethepresident.util.Query;
+import showmethepresident.util.DbManage;
 
 public class SurveyOnly implements AnalysisStrategy{
 
@@ -21,7 +21,7 @@ public class SurveyOnly implements AnalysisStrategy{
 	}
 	
 	public Survey findNewestSurvey(Candidate candidate){
-		Query query = new Query();
+		DbManage query = new DbManage();
 		String id = candidate.getId()+"";
 		Survey newestSurvey = null;
 				

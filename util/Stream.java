@@ -17,7 +17,7 @@ public class Stream {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(input);
+		//System.out.println(input);
 		return input;
 	}
 	
@@ -40,7 +40,7 @@ public class Stream {
 		}
 		
 		float in = sc.nextFloat();
-		System.out.println(in);
+		//System.out.println(in);
 		return in;
 	}
 
