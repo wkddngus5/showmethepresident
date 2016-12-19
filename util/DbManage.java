@@ -56,11 +56,10 @@ public class DbManage {
 
 	// 반환값 없는 쿼리 날리기
 	public static void sendIQuery(String query) {
-		System.out.println(sql = query);
 		try {
 			stmt = conn.createStatement();
 			int n = stmt.executeUpdate(sql);
-			System.out.println(query);
+			//System.out.println(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -17,6 +17,8 @@ public class Survey {
 		this.value = value;
 	}
 
+	public Survey() {}
+
 	public int getOrganization() {
 		return organization;
 	}

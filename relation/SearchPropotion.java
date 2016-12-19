@@ -15,6 +15,8 @@ public class SearchPropotion {
 		this.candidateId = candidateId;
 		this.value = value;
 	}
+	
+	public SearchPropotion(){};
 
 	public Date getDate() {
 		return date;
@@ -30,6 +32,10 @@ public class SearchPropotion {
 	
 	public float gap(SearchPropotion searchPropotion){
 		return searchPropotion.getValue()-this.value;
+	}
+	
+	public void setValue(float value){
+		this.value=value;
 	}
 
 }

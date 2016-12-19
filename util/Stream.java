@@ -22,14 +22,17 @@ public class Stream {
 	}
 	
 	public static int inputInt(){
-		int in = 0;
+		int num = 0;
+		int input = 0;
 		try {
 			InputStreamReader isr = new InputStreamReader(System.in);
-			in = isr.read();
+			while((input = isr.read())!='\n'){
+				num = (num*10)+input-48;
+			};
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return in-48;
+		return num;
 	}
 	
 	public static float inputFloat(){

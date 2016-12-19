@@ -19,10 +19,6 @@ public class Report {
 
 	public ArrayList<Candidate> startAnalysis(ArrayList<Candidate> candidateList) {
 				
-//		for (int i = 0; i < candidateList.size(); i++) {
-//			System.out.println(candidateList.get(i).getName());
-//		}
-
 		SearchPropotionOnly searchPropotionOnly = new SearchPropotionOnly();
 		searchPropotionOnly.showMeThePresident(candidateList);
 
@@ -53,7 +49,9 @@ public class Report {
 		if(candidate.getParty()!=null){
 			partyPoint = candidate.getParty().getApprovalRating()*0.1F;
 		}
+		System.out.println(candidate.getName()+": "+searchPoint+", "+surveyPoint+", "+trendsPoint);
 		totalPoint = (searchPoint+surveyPoint+trendsPoint+partyPoint);
+		System.out.println(candidate.getId()+": "+totalPoint);
 		
 		}catch(NullPointerException e){
 			//System.err.println(candidate.getName()+"후보의 정보가 부족합니다.");
@@ -63,16 +61,13 @@ public class Report {
 	
 	//후보자 종합 점수순으로 정렬
 	public ArrayList<Candidate> sorting(ArrayList<Candidate> candidateList){
-		for(int i = candidateList.size()-1; i!=0;i--){
-			Candidate nowCandidate = candidateList.get(i);
-			for(int j=1; i-j>-1;j++){
-				if(nowCandidate.getTotalPoint() > candidateList.get(i-j).getTotalPoint()){
-					Candidate tmp = candidateList.get(i-j);
-					candidateList.set(i-j, nowCandidate);
-					candidateList.set(i-j+1, tmp);
-				}
+		Collections.sort((List)candidateList, new Comparator<Candidate>(){
+			@Override
+			public int compare(Candidate o1, Candidate o2) {
+				return (o1.getTotalPoint()>o2.getTotalPoint()?-1:(o1.getTotalPoint()>o2.getTotalPoint())?1:0);
 			}
-		}
+		});
+		
 		return candidateList;
 	}
 	

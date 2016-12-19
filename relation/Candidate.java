@@ -1,5 +1,9 @@
 package showmethepresident.relation;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import showmethepresident.util.DbManage;
 import showmethepresident.util.Stream;
 
@@ -9,12 +13,12 @@ public class Candidate{
 	private String name;
 	private int partyId=0;
 	
-	private SearchPropotion searchPropotion=null;
-	private Survey survey=null;
+	private SearchPropotion searchPropotion=new SearchPropotion();
+	private Survey survey=new Survey();
 	private Party party=null;
 	private float searchOnWeek=0;
 	private float totalPoint=0;
-	
+	private HashSet<KeyWord> keyWords = new HashSet<KeyWord>();
 	
 	public Candidate(int id, String name, int partyId) {
 		super();
@@ -81,18 +85,37 @@ public class Candidate{
 
 	public void setTotalPoint(float totalPoint) {
 		this.totalPoint = totalPoint;
+	}	
+	
+	public Iterator<KeyWord> getKeyWordIterator(){
+		return keyWords.iterator();
 	}
 	
+	public void addKeyWord(KeyWord keyWord){
+		keyWords.add(keyWord);
+	}
 	
+	public void removeKeyWord(KeyWord keyWord){
+		keyWords.remove(keyWord);
+	}
 	
 	public static void detailCandidate(Candidate candidate){
 		int inputInt = 0;
+		String keyWordString = "";
+		Iterator<KeyWord> itr =candidate.getKeyWordIterator();
+		while(itr.hasNext()){
+			if(!keyWordString.equals("")){
+				keyWordString+=", ";
+			}
+			keyWordString+=itr.next().getWord();
+		}
+		
 		do{
 			System.out.println("\n후보 이름: "+candidate.getName()
 				+"\n소속 정당: "+candidate.getParty().getName()+"(당 지지율: "+candidate.getParty().getApprovalRating()+"%)"
 				+"\n검색량: "+candidate.getSearchPropotion().getValue()+"%("+candidate.getSearchPropotion().getDate()+")"
 				+"\n여론조사 지지율: "+candidate.getSurvey().getValue()+"%("+candidate.getSurvey().getDate()+")"
-				+"\n연관 단어들: ");
+				+"\n연관 단어들: "+keyWordString);
 		
 			System.out.print("\n1. 데이터 입력   |2. 데이터 수정   |3. 데이터 삭제   |4.뒤로\n입력: ");
 			inputInt = Stream.inputInt();

@@ -62,8 +62,8 @@ public class ShowMeThePresident {
 		for (Party party : partyList) {
 			System.out.println(party.getId() + ". " + party.getName());
 		}
-		System.out.println((partyList.size() + 1) + ". 새 후보 추가");
-		System.out.println((partyList.size() + 2) + ". 후보 삭제");
+		System.out.println((partyList.size() + 1) + ". 새 정당 추가");
+		System.out.println((partyList.size() + 2) + ". 정당 삭제");
 		System.out.println((partyList.size() + 3) + ". 뒤로");
 
 		do {
@@ -89,13 +89,14 @@ public class ShowMeThePresident {
 		Report report = new Report();
 
 		DbManage.accessDB();
-		ArrayList<Candidate> candidateList = report.selectAllCandidate();
-		report.startAnalysis(candidateList);
-		candidateList = report.sorting(candidateList);
-		report.showMeThePresident(candidateList);
+		ArrayList<Candidate> candidateList = new ArrayList<Candidate>();
 
 		int inputInt;
 		do {
+			candidateList = report.selectAllCandidate();
+			report.startAnalysis(candidateList);
+			candidateList = report.sorting(candidateList);
+			report.showMeThePresident(candidateList);
 			System.out.println("1. 후보정보 조회   |2. 정당정보 조회   |3. 프로그램 종료");
 			System.out.print("선택: ");
 			inputInt = Stream.inputInt();
